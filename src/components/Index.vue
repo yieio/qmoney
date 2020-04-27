@@ -1,14 +1,9 @@
 <template>
   <div class="container">
-    <div class="q-container">
-      <a-form>
-        <h2>输入您的信用卡积分查一查可换多少钱?</h2>
-        <div>
-          <a-form-item>
-            <label class="money-label">可兑换金额（元）：</label>
-            <span class="money">{{money}}</span>
-          </a-form-item>
-          <a-form-item label="常用银行">
+    <a-card title="查一查您的信用卡积分可换多少钱？" :bordered="false" style="margin:10px;" class="q-container">   
+      <a-form> 
+        <div> 
+          <a-form-item label="选择信用卡开卡银行">
             <a-radio-group
               @change="handleBankChange"
               v-model="selectBankName"
@@ -20,13 +15,10 @@
                 v-bind:key="index"
                 :value="bank.name"
               >{{bank.simpleName}}</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-
-          <a-form-item label="其他银行-可输入查询">
+            </a-radio-group> 
             <a-select
               showSearch
-              placeholder="选择信用卡开卡银行"
+              placeholder="输入查询"
               v-model="selectBankName"
               style="width: 100%"
               :defaultActiveFirstOption="false"
@@ -51,9 +43,8 @@
                 v-bind:key="index"
                 :value="etype.uPrice"
               >{{etype.productName}}</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-          <a-form-item label="输入您的信用卡积分">
+            </a-radio-group> 
+          <div class="ant-col ant-form-item-label" style="padding:0; padding-top:8px;"><label title="输入您的信用卡积分" class="">输入您的信用卡积分</label></div>
             <a-input
               name="score"
               class="score-input"
@@ -64,9 +55,13 @@
               :allowClear="true"
             />
           </a-form-item>
+          <a-form-item>
+            <label class="money-label">可兑换金额（元）：</label>
+            <span class="money">{{money}}</span>
+          </a-form-item>
         </div>
       </a-form>
-    </div>
+    </a-card>
   </div>
 </template>
 
@@ -93,7 +88,7 @@ export default {
       ],
       exchanges: [],
       exchangeType: "0",
-      scoreNum: null
+      scoreNum: 10000
     };
   },
 
@@ -109,25 +104,18 @@ export default {
     }
   },
 
-  created: function() {
-    console.log(bankNames);
+  created: function() { 
   },
   methods: {
-    handleBankChange: function(e) {
-      console.log(e);
+    handleBankChange: function() { 
       this.exchanges = this.getExchangeType(this.selectBankName);
-      this.exchangeType = this.getBestExchangeType(this.exchanges);
-      console.log(this.exchanges);
+      this.exchangeType = this.getBestExchangeType(this.exchanges); 
     },
 
-    handleTypeChange: function(e) {
-      console.log(e);
-      console.log(this.exchangeType);
+    handleTypeChange: function() { 
     },
 
-    handleScoreChange: function(e) {
-      console.log(e);
-      console.log(this.scoreNum);
+    handleScoreChange: function() {
     },
 
     /**
@@ -163,10 +151,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
+    border: solid 0.1px #f1f1f1;
 }
-.q-container {
-  margin: auto 30px;
-  padding-top: 30px;
+.q-container { 
 }
 .money {
   font-size: 1.8rem;
